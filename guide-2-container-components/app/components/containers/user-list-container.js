@@ -1,35 +1,36 @@
-import React from 'react';
-import _ from 'lodash';
-import UserList from '../views/user-list';
-import * as userApi from '../../api/user-api';
+import React from "react";
+import _ from "lodash";
+import UserList from "../views/user-list";
+import * as userApi from "../../api/user-api";
 
-const UserListContainer = React.createClass({
+class UserListContainer extends React.Component {
 
-  getInitialState: function() {
-    return {
-      users: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            users: []
+        };
+        this.deleteUser = this.deleteUser.bind(this);
     }
-  },
 
-  componentDidMount: function() {
-    userApi.getUsers().then(users => {
-      this.setState({users: users})
-    });
-  },
+    componentDidMount() {
+        userApi.getUsers().then(users => {
+            this.setState({users: users})
+        })
+    }
 
-  deleteUser: function(userId) {
-    userApi.deleteUser(userId).then(() => {
-      const newUsers = _.filter(this.state.users, user => user.id != userId);
-      this.setState({users: newUsers})
-    });
-  },
+    deleteUser(userId) {
+        userApi.deleteUser(userId).then(() => {
+            const newUsers = _.filter(this.state.users, user => user.id != userId);
+            this.setState({users: newUsers})
+        });
+    }
 
-  render: function() {
-    return (
-      <UserList users={this.state.users} deleteUser={this.deleteUser} />
-    );
-  }
+    render() {
+        return (
+            <UserList users={this.state.users} deleteUser={this.deleteUser}/>
+        );
+    }
 
-});
-
+}
 export default UserListContainer;

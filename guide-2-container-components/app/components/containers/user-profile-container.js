@@ -1,38 +1,38 @@
-import React from 'react';
-import UserProfile from '../views/user-profile';
-import * as userApi from '../../api/user-api';
+import React from "react";
+import UserProfile from "../views/user-profile";
+import * as userApi from "../../api/user-api";
 
-const UserProfileContainer = React.createClass({
+class UserProfileContainer extends React.Component {
 
-  getInitialState: function() {
-    return {
-      name: null,
-      imageUrl: null,
-      twitter: null,
-      worksOn: null,
-      repos: []
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: null,
+            imageUrl: null,
+            twitter: null,
+            worksOn: null,
+            repos: []
+        }
     }
-  },
 
-  componentDidMount: function() {
-    let userId = this.props.params.userId
-    userApi.getProfile(userId).then(profile => {
-      this.setState({
-        name: profile.name,
-        imageUrl: profile.imageUrl,
-        twitter: profile.twitter,
-        worksOn: profile.worksOn,
-        repos: profile.repos
-      });
-    });
-  },
+    componentDidMount() {
+        let userId = this.props.params.userId;
+        userApi.getProfile(userId).then(profile => {
+            this.setState({
+                name: profile.name,
+                imageUrl: profile.imageUrl,
+                twitter: profile.twitter,
+                worksOn: profile.worksOn,
+                repos: profile.repos
+            });
+        });
+    }
 
-  render: function() {
-    return (
-      <UserProfile {...this.state} />
-    );
-  }
-
-});
+    render() {
+        return (
+            <UserProfile {...this.state} />
+        );
+    }
+}
 
 export default UserProfileContainer;
