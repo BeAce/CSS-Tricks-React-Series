@@ -23,7 +23,7 @@ class WidgetListContainer extends React.Component {
 
     deleteWidget(widgetId) {
         widgetApi.deleteWidget(widgetId).then(() => {
-            const newWidgets = _.filter(this.state.widgets, widget => widget.id != widgetId);
+            let newWidgets = _.filter(this.state.widgets, widget => widget.id != widgetId);
             this.setState({
                 widgets: newWidgets
             })

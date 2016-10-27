@@ -24917,58 +24917,62 @@
 /* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	exports.default = function (props) {
-	  return _react2.default.createElement(
-	    'div',
-	    { className: 'app' },
-	    _react2.default.createElement('header', { className: 'primary-header' }),
-	    _react2.default.createElement(
-	      'aside',
-	      { className: 'primary-aside' },
-	      _react2.default.createElement(
-	        'ul',
-	        null,
+	    return _react2.default.createElement(
+	        "div",
+	        { className: "app" },
 	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/', activeClassName: 'active' },
-	            'Home'
-	          )
+	            "header",
+	            { className: "primary-header" },
+	            "React"
 	        ),
 	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/users', activeClassName: 'active' },
-	            'Users'
-	          )
+	            "aside",
+	            { className: "primary-aside" },
+	            _react2.default.createElement(
+	                "ul",
+	                null,
+	                _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: "/", activeClassName: "active" },
+	                        "Home"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: "/users", activeClassName: "active" },
+	                        "Users"
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    "li",
+	                    null,
+	                    _react2.default.createElement(
+	                        _reactRouter.Link,
+	                        { to: "/widgets", activeClassName: "active" },
+	                        "Widgets"
+	                    )
+	                )
+	            )
 	        ),
 	        _react2.default.createElement(
-	          'li',
-	          null,
-	          _react2.default.createElement(
-	            _reactRouter.Link,
-	            { to: '/widgets', activeClassName: 'active' },
-	            'Widgets'
-	          )
+	            "main",
+	            null,
+	            props.children
 	        )
-	      )
-	    ),
-	    _react2.default.createElement(
-	      'main',
-	      null,
-	      props.children
-	    )
-	  );
+	    );
 	};
 	
 	var _react = __webpack_require__(1);
@@ -25083,11 +25087,13 @@
 /* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
 	
@@ -25109,40 +25115,57 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var UserListContainer = _react2.default.createClass({
-	  displayName: 'UserListContainer',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      users: []
-	    };
-	  },
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
+	var UserListContainer = function (_React$Component) {
+	    _inherits(UserListContainer, _React$Component);
 	
-	    userApi.getUsers().then(function (users) {
-	      _this.setState({ users: users });
-	    });
-	  },
+	    function UserListContainer(props) {
+	        _classCallCheck(this, UserListContainer);
 	
-	  deleteUser: function deleteUser(userId) {
-	    var _this2 = this;
+	        var _this = _possibleConstructorReturn(this, (UserListContainer.__proto__ || Object.getPrototypeOf(UserListContainer)).call(this, props));
 	
-	    userApi.deleteUser(userId).then(function () {
-	      var newUsers = _lodash2.default.filter(_this2.state.users, function (user) {
-	        return user.id != userId;
-	      });
-	      _this2.setState({ users: newUsers });
-	    });
-	  },
+	        _this.state = {
+	            users: []
+	        };
+	        _this.deleteUser = _this.deleteUser.bind(_this);
+	        return _this;
+	    }
 	
-	  render: function render() {
-	    return _react2.default.createElement(_userList2.default, { users: this.state.users, deleteUser: this.deleteUser });
-	  }
+	    _createClass(UserListContainer, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var _this2 = this;
 	
-	});
+	            userApi.getUsers().then(function (users) {
+	                _this2.setState({ users: users });
+	            });
+	        }
+	    }, {
+	        key: "deleteUser",
+	        value: function deleteUser(userId) {
+	            var _this3 = this;
+	
+	            userApi.deleteUser(userId).then(function () {
+	                var newUsers = _lodash2.default.filter(_this3.state.users, function (user) {
+	                    return user.id != userId;
+	                });
+	                _this3.setState({ users: newUsers });
+	            });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(_userList2.default, { users: this.state.users, deleteUser: this.deleteUser });
+	        }
+	    }]);
+	
+	    return UserListContainer;
+	}(_react2.default.Component);
 	
 	exports.default = UserListContainer;
 
@@ -43368,11 +43391,13 @@
 /* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
 	
@@ -43390,40 +43415,55 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var UserProfileContainer = _react2.default.createClass({
-	  displayName: 'UserProfileContainer',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      name: null,
-	      imageUrl: null,
-	      twitter: null,
-	      worksOn: null,
-	      repos: []
-	    };
-	  },
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
+	var UserProfileContainer = function (_React$Component) {
+	    _inherits(UserProfileContainer, _React$Component);
 	
-	    var userId = this.props.params.userId;
-	    userApi.getProfile(userId).then(function (profile) {
-	      _this.setState({
-	        name: profile.name,
-	        imageUrl: profile.imageUrl,
-	        twitter: profile.twitter,
-	        worksOn: profile.worksOn,
-	        repos: profile.repos
-	      });
-	    });
-	  },
+	    function UserProfileContainer(props) {
+	        _classCallCheck(this, UserProfileContainer);
 	
-	  render: function render() {
-	    return _react2.default.createElement(_userProfile2.default, this.state);
-	  }
+	        var _this = _possibleConstructorReturn(this, (UserProfileContainer.__proto__ || Object.getPrototypeOf(UserProfileContainer)).call(this, props));
 	
-	});
+	        _this.state = {
+	            name: null,
+	            imageUrl: null,
+	            twitter: null,
+	            worksOn: null,
+	            repos: []
+	        };
+	        return _this;
+	    }
+	
+	    _createClass(UserProfileContainer, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var _this2 = this;
+	
+	            var userId = this.props.params.userId;
+	            userApi.getProfile(userId).then(function (profile) {
+	                _this2.setState({
+	                    name: profile.name,
+	                    imageUrl: profile.imageUrl,
+	                    twitter: profile.twitter,
+	                    worksOn: profile.worksOn,
+	                    repos: profile.repos
+	                });
+	            });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(_userProfile2.default, this.state);
+	        }
+	    }]);
+	
+	    return UserProfileContainer;
+	}(_react2.default.Component);
 	
 	exports.default = UserProfileContainer;
 
@@ -43501,11 +43541,13 @@
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(1);
 	
@@ -43527,40 +43569,62 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var WidgetListContainer = _react2.default.createClass({
-	  displayName: 'WidgetListContainer',
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	  getInitialState: function getInitialState() {
-	    return {
-	      widgets: []
-	    };
-	  },
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
+	var WidgetListContainer = function (_React$Component) {
+	    _inherits(WidgetListContainer, _React$Component);
 	
-	    widgetApi.getWidgets().then(function (widgets) {
-	      _this.setState({ widgets: widgets });
-	    });
-	  },
+	    function WidgetListContainer(props) {
+	        _classCallCheck(this, WidgetListContainer);
 	
-	  deleteWidget: function deleteWidget(widgetId) {
-	    var _this2 = this;
+	        var _this = _possibleConstructorReturn(this, (WidgetListContainer.__proto__ || Object.getPrototypeOf(WidgetListContainer)).call(this, props));
 	
-	    widgetApi.deleteWidget(widgetId).then(function () {
-	      var newWidgets = _lodash2.default.filter(_this2.state.widgets, function (widget) {
-	        return widget.id != widgetId;
-	      });
-	      _this2.setState({ widgets: newWidgets });
-	    });
-	  },
+	        _this.state = {
+	            widgets: []
+	        };
+	        _this.deleteWidget = _this.deleteWidget.bind(_this);
+	        return _this;
+	    }
 	
-	  render: function render() {
-	    return _react2.default.createElement(_widgetList2.default, { widgets: this.state.widgets, deleteWidget: this.deleteWidget });
-	  }
+	    _createClass(WidgetListContainer, [{
+	        key: "componentDidMount",
+	        value: function componentDidMount() {
+	            var _this2 = this;
 	
-	});
+	            widgetApi.getWidgets().then(function (widgets) {
+	                _this2.setState({
+	                    widgets: widgets
+	                });
+	            });
+	        }
+	    }, {
+	        key: "deleteWidget",
+	        value: function deleteWidget(widgetId) {
+	            var _this3 = this;
+	
+	            widgetApi.deleteWidget(widgetId).then(function () {
+	                var newWidgets = _lodash2.default.filter(_this3.state.widgets, function (widget) {
+	                    return widget.id != widgetId;
+	                });
+	                _this3.setState({
+	                    widgets: newWidgets
+	                });
+	            });
+	        }
+	    }, {
+	        key: "render",
+	        value: function render() {
+	            var widgets = this.state.widgets;
+	            return _react2.default.createElement(_widgetList2.default, { widgets: widgets, deleteWidget: this.deleteWidget });
+	        }
+	    }]);
+	
+	    return WidgetListContainer;
+	}(_react2.default.Component);
 	
 	exports.default = WidgetListContainer;
 
